@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <hr>
+      <p><i class="fa fa-clock-o"></i> Posted on <%= @story.created_at.strftime("%B %d, %Y at %l:%M %p") %></p>
+      <p><i class="fa fa-clock-o"></i> by <%= @story.user.name %></p>
+      <p><i class="fa fa-clock-o"></i> Category <%= @story.category.name if @story.category %></p>
+      <hr>
+      <p class="lead"><%= @story.body %></p>
+      <hr>
+      <div class="well">
+        <h4>Leave a Comment:</h4>
+        <%= form_for [@story, Comment.new] do |f| %>
+          <div class="form-group">
+            <%= f.text_area :body, class: "form-control", rows: 3 %>
+            <br/>
+            <%= f.submit "Submit", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+      </div>
+      <hr>
+      <% @story.comments.each do |comment| %>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <img class="media-object" src="http://placehold.it/64x64" alt="">
+          </a>
+          <div class="media-body">
+            <h4 class="media-heading"><%= comment.user.name %>
+              <small><%= comment.created_at.strftime('%B %d, %Y at %l:%M %p') %></small>
+            </h4>
+            <%= comment.body %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

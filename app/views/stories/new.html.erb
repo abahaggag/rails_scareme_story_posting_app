@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="col-md-8 col-md-offset-2">
+    <div class="form-area">
+      <h3>Create a Story</h3>
+      <%= form_for @story do |f| %>
+        <div class="form-group">
+          <%= f.label :body, "Tell us your scary story" %>
+          <%= f.text_area :body, rows: 10, class: "form-control" %>
+          <br/>
+          <%= f.label :category_id %>
+          <%= f.select :category_id, Category.all.map {|c| [c.name, c.id]}, {}, {class: "form-control", id: "select"} %>
+        </div>
+        
+        <%= f.submit class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>
